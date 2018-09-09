@@ -19,6 +19,15 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script> <script type="text/javascript">    
+    //<![CDATA[
+        bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+    //]]>
+  </script>  
+  
+ 
+
 </head>
 <body>
     <div id="app">
@@ -52,8 +61,8 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
-        </main>
+            @yield('content')            
+        </main>        
     </div>
 </body>
 </html>

@@ -14,3 +14,9 @@
 Route::redirect('/','/home',301);
 Route::get('/home','HomeController@Home')->name('home');
 Route::post('/home','HomeController@post')->name('home.post');
+Route::get('/{blog_id}/{blog_slug}','BlogController@view')->name('blog.view');
+Route::get('/{blog_id}/{blog_slug}/edit','BlogController@editPrompt')->name('edit.prompt');
+Route::post('/{blog_id}/{blog_slug}/edit','BlogController@editPromptPost')->name('edit.prompt.post');
+Route::get('/{blog_id}/{blog_slug}/editPost','BlogController@editBlog')->name('edit.blog');
+Route::post('/{blog_id}/{blog_slug}/editPost','BlogController@editBlogPost')->name('edit.blog.post');
+

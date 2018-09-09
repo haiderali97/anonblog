@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Posts;
+use App\Helpers\Slugger;
 
 class HomeController extends BaseController
 {
@@ -25,26 +26,20 @@ class HomeController extends BaseController
         ]);
         
         //Generate slug 
-        $slug = $this->slugify($validated['blog_title']);                
+        $slug = Slugger::slugit($validated['blog_title']);                
         $posts = new Posts;
         $posts->blog_title = $validated['blog_title'];
         $posts->blog_post = $validated['blog_post'];
-        $posts->blog_slug = $slug;
+        $posts->slug = $slug;
         $posts->password = $validated['blog_password'];
         if($posts->save()){
-            return redirect()->back()->with('message',['msg' => 'Success! Your blog has been posted!','type' => 1]);
+            $url = url('/'.$posts->id.'/'.$slug);            
+            return redirect()->back()->with('message',['msg' => 'Success! Your blog has been posted!','url' => $url,'type' => 1]);
         } else {
             return redirect()->back()->with('message',['msg' => 'Aww :( An error occured im sorry :(','type' => 0]);
         }
     }
 
-    private function slugify($slug){
-        if(strlen($slug)>20){
-            $trim = -1 * abs(strlen($slug));
-            $slug = substr($slug,$trim,10);            
-        }
-        $slug = str_replace(" ",'-',$slug);
-        return strtolower($slug);
-    }
+
 }
 
