@@ -18,3 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/castvote', 'APIController@castVote');
+Route::post('/postComment','APIController@postComment');
+Route::get('/{blog_id}/getComments','APIController@getComments');
+Route::get('/getPosts','APIController@getPosts');

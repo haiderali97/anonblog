@@ -19,4 +19,5 @@ Route::get('/{blog_id}/{blog_slug}/edit','BlogController@editPrompt')->name('edi
 Route::post('/{blog_id}/{blog_slug}/edit','BlogController@editPromptPost')->name('edit.prompt.post');
 Route::get('/{blog_id}/{blog_slug}/editPost','BlogController@editBlog')->name('edit.blog');
 Route::post('/{blog_id}/{blog_slug}/editPost','BlogController@editBlogPost')->name('edit.blog.post');
-
+Route::get('/api/getPosts','APIController@getPosts');
+Route::get('/genPosts','APIController@genPosts');

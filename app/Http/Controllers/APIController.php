@@ -53,4 +53,49 @@ class APIController extends BaseController
            'upvotes' => $upvotes, 'downvotes' => $downvotes
        ]);
     }
+
+    public function postComment(Request $request){
+        $blog_id = $request->input('blog_id');
+        if(!$blog_id) return response('Invalid resource',404);
+
+        $new_comment = $request->input('comment');
+        if(!$new_comment) return response('Invalid resource',404);
+
+        $post = Posts::find($blog_id);
+        if(!$post) return response('Invalid resource',404);
+
+        $comment = new Comments;
+        $comment->blog_id = $blog_id;
+        $comment->blog_comment = $new_comment;
+
+        if(!$comment->save()) return response('Unexpected error',404);
+        return response('All ok',200);
+    }
+
+    public function getComments(Request $request,$blog_id){        
+        if(!$blog_id) return response('Invalid resource 2', 404);
+        $blog = Posts::find($blog_id);
+        if(!$blog) return response('Invalid resource 1',404);
+
+        $comments = Comments::where('blog_id',1)->orderBy('id','desc')->Simplepaginate(5);
+        $extra = collect(['hasPages' => $comments->hasPages()]);
+        $response = $extra->merge($comments);
+        return response()->json($response);
+    }
+
+    public function getPosts(Request $request){
+        $posts = Posts::paginate(15);
+        return response()->json($posts);
+    }
+
+    public function genPosts(){
+        for($i = 8; $i<49; $i++){
+            $post = new Posts;
+            $post->blog_title = "{$i}th post mofo";
+            $post->blog_post = "GAGA OOGAGA YAMAM YAMAMAM";
+            $post->slug = 'nobody cares';
+            $post->password = '123456';
+            $post->save();
+        }
+    }
 }

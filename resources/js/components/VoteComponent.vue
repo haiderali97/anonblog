@@ -41,11 +41,9 @@
         methods : {
             upvote : function(event){ 
                self = this;                             
-               x = localStorage.getItem(this.blog_id);
-               console.log(headers);
+               x = localStorage.getItem(this.blog_id);               
                if(!x){                                      
-                   this.castVote('upvote').then(function(data){
-                        console.log(headers);
+                   this.castVote('upvote').then(function(data){                        
                         localStorage.setItem(self.blog_id,'upvote');                   
                         self.upvotes = data.upvotes;
                         self.downvotes = data.downvotes; 
@@ -65,8 +63,7 @@
 
             downvote : function(event){
                 self = this;
-                x = localStorage.getItem(this.blog_id);
-                console.log(x);
+                x = localStorage.getItem(this.blog_id);                
                 if(!x){
                     this.castVote('downvote').then(function(data){
                         localStorage.setItem(self.blog_id,'downvote');                    
@@ -97,8 +94,7 @@
                     axios.post(route,data,headers)
                     .then(function(data){                                              
                         resolve(data.data);
-                    }).catch(function(err){
-                        console.log(err);
+                    }).catch(function(err){                        
                         reject(err);
                     })
                 });

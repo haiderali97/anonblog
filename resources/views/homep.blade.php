@@ -76,14 +76,7 @@
                 </div>
             </div>
 
-            <div class='card'>
-                <div class='card-header'>
-                    Popular Posts
-                </div>
-                <div class='card-body'>
-                
-                </div>
-            </div>
+            <posts-component />
         </div>
     </div>
 </div>
