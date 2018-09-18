@@ -20,6 +20,8 @@
     "vue": "^2.5.7"
   },
   "dependencies": {
+    "date-fns": "^1.29.0",
+    "font-awesome": "^4.7.0",
     "vue-infinite-scroll": "^2.0.2"
   }
 }

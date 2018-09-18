@@ -10,7 +10,7 @@
 
                             <div class="col-md-6">  
                                 <textarea v-if="error" id="comment" class="form-control is-invalid" name="comment" v-model="comment"></textarea>                              
-                                <textarea v-else="" id="comment"  class="form-control" name="comment" v-model="comment"></textarea> 
+                                <textarea v-else id="comment"  class="form-control" name="comment" v-model="comment"></textarea> 
                                     <span v-if="error" class="invalid-feedback" role="alert">
                                         <strong>{{ error }}</strong>
                                     </span>                                                                                                
@@ -34,8 +34,8 @@
             <!-- Comments with Pagination -->
             <div class='card'>
                 <div class='card-header'>Comments</div>
-                <div class='card-body'>
-                   <p v-for="comment in comments">{{comment.blog_comment}}</p>
+                <div class='card-body comments'>
+                    <comment v-for="comment in comments" :comment="comment" :key="comment.id" />
                     <div v-if="paginate.hasPages">
                         <button v-if="paginate.prev_page_url" class="btn btn-primary" @click="paginateComments(0)">Previous Page</button>
                         <button v-if="paginate.next_page_url" class="btn btn-primary" @click="paginateComments(1)">Next Page</button>
@@ -47,12 +47,16 @@
 </template>
 
 <script>
+const Comment = require('./Comment');
 const csrfToken = require('./lib/csrfToken');
 const axios = require('axios');
 const headers = {...csrfToken}   
 module.exports = {
     props :{
         blog_id : { type: String, required: true }
+    },
+    components: {
+        Comment
     },
     mounted (){
       this.getComments();

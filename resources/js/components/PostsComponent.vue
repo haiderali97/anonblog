@@ -3,15 +3,20 @@
         <div class='card-header'>
             posts
         </div>
-        <div v-infinite-scroll="pullContent" class='card-body'>
-            <div class='card-header' v-for="post in posts">{{post.blog_title}}</div>
+        <div v-infinite-scroll="pullContent" class='card-body posts-list'>
+            <post v-for="post in posts" :post="post" :key="post.id" />
         </div>        
     </div>
 
 </template>
 <script>
+const Post = require('./Post');
+
 module.exports = {
     directives : {infiniteScroll},
+    components: {
+        Post
+    },
     data : function(){
         return {
             posts : {},
